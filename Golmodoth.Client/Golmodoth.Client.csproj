@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleGameEngine\Source\ConsoleGameEngine.csproj" />
+    <ProjectReference Include="..\Golmodoth.Shared\Golmodoth.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
