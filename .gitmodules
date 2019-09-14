@@ -1,0 +1,7 @@
+[submodule "ConsoleGameEngine"]
+	path = ConsoleGameEngine
+	url = https://github.com/LtLi0n/ConsoleGameEngine
+	branch = refactor
+[submodule "LionLibrary"]
+	path = LionLibrary
+	url = https://github.com/LtLi0n/LionLibrary
