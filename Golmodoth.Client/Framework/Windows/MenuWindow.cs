@@ -34,11 +34,7 @@ namespace Golmodoth.Client
 
         public override void OnUpdate(CoreConsole console)
         {
-            if(console.KeyPressed(ConsoleKey.Escape) || console.KeyPressed(ConsoleKey.D3))
-            {
-                Environment.Exit(0);
-            }
-            else if(console.KeyPressed(ConsoleKey.D2))
+            if(console.KeyPressed(ConsoleKey.D2))
             {
                 console.ActiveWindow = ChildWindows[0];
             }

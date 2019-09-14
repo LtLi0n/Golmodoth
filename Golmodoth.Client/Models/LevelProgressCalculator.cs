@@ -25,7 +25,7 @@ namespace Golmodoth.Client
             {
                 totalXp -= xpCap;
                 level++;
-                xpCap += level * 100;
+                xpCap += level * 250;
             }
 
             return new LevelProgress(level, (ulong)totalXp, xpCap);

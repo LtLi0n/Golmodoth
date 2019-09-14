@@ -13,6 +13,6 @@
             XpCap = xpCap;
         }
 
-        public override string ToString() => $"Level: {Level} ( {Xp} / {XpCap} )";
+        public override string ToString() => $"Level: {Level} ( {string.Format("{0:n0}", Xp)} / {string.Format("{0:n0}", XpCap)} )";
     }
 }

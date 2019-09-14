@@ -20,6 +20,7 @@ namespace Golmodoth.Client
             };
 
             fb.WriteLine("Hello Player");
+            fb.Color = FG_WHITE;
             fb.WriteLine("2) Character stuff");
             VisibleFrame = fb.Build();
 
