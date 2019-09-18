@@ -15,14 +15,11 @@ namespace Golmodoth.Client
         private const string TITLE = "Character";
         private const char BORDER_GLYPGH = '=';
 
-        public ISizeable Size { get; }
-
         private readonly SocketCharacter _character;
 
-        public CharacterWindow(Window parent, ISizeable size) : base()
+        public CharacterWindow(ISizeable size, Window parent) : base(size)
         {
             Parent = parent;
-            Size = size;
 
             _character = new SocketCharacter()
             {
@@ -93,7 +90,7 @@ namespace Golmodoth.Client
             else if(console.KeyPressed(ConsoleKey.Spacebar))
             {
                 _character.TotalXp += _character.LevelProgress.Level * 10;
-                VisibleFrame = CreateFrame(Size);
+                VisibleFrame = CreateFrame(this);
             }
         }
     }

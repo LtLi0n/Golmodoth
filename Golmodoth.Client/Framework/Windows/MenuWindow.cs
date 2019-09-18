@@ -9,7 +9,7 @@ namespace Golmodoth.Client
 {
     public class MenuWindow : Window
     {
-        public MenuWindow(ISizeable size)
+        public MenuWindow(ISizeable size) : base(size)
         {
             FrameBuilder fb = new FrameBuilder(size)
             {
@@ -26,7 +26,7 @@ namespace Golmodoth.Client
 
             ChildWindows = new[]
             {
-                new PlayerWindow(this, size)
+                new PlayerWindow(size, this)
             };
         }
 

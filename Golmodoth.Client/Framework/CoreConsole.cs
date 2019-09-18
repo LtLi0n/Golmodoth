@@ -15,6 +15,7 @@ namespace Golmodoth.Client
         public int Height => Engine.Height;
 
         private MenuWindow _menu;
+        private LoginWindow _login;
 
         public CoreConsole() : base() { }
 
@@ -23,8 +24,8 @@ namespace Golmodoth.Client
             Console.Title = "Golmodoth";
             Engine.SetPalette(PaletteColor.Containers.Default);
 
-            _menu = new MenuWindow(this);
-            ActiveWindow = _menu;
+            _login = new LoginWindow(this);
+            ActiveWindow = _login;
         }
 
         public override void Render()

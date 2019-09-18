@@ -9,11 +9,11 @@ namespace Golmodoth.Client
 {
     public class PlayerWindow : Window
     {
-        public PlayerWindow(Window parent, ISizeable size) : base()
+        public PlayerWindow(ISizeable size, Window parent) : base(size)
         {
             Parent = parent;
 
-            FrameBuilder fb = new FrameBuilder(size)
+            FrameBuilder fb = new FrameBuilder(this)
             {
                 Color = FG_GREEN,
                 Offset = new Point(4, 2)
@@ -26,7 +26,7 @@ namespace Golmodoth.Client
 
             ChildWindows = new[]
             {
-                new CharacterWindow(this, size)
+                new CharacterWindow(size, this)
             };
         }
 

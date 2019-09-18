@@ -5,28 +5,41 @@ using System.Text;
 
 namespace Golmodoth.Client
 {
-    public abstract class Window : IEngineObject
+    public abstract class Window : IEngineObject, ISizeable
     { 
+        public int Width { get; }
+        public int Height { get; }
+
         public Window Parent { get; set; }
         public Window[] ChildWindows { get; set; }
 
         public Frame VisibleFrame { get; set; }
 
         //default
-        public Window() { }
-
-        public Window(Window parentWindow)
+        public Window(ISizeable size) 
         {
+            Width = size.Width;
+            Height = size.Height;
+        }
+
+        public Window(ISizeable size, Window parentWindow)
+        {
+            Width = size.Width;
+            Height = size.Height; 
             Parent = parentWindow;
         }
 
-        public Window(Window[] childWindows)
+        public Window(ISizeable size, Window[] childWindows)
         {
+            Width = size.Width;
+            Height = size.Height;
             ChildWindows = childWindows;
         }
 
-        public Window(Window parent, Window[] childWindows)
+        public Window(ISizeable size, Window parent, Window[] childWindows)
         {
+            Width = size.Width;
+            Height = size.Height;
             Parent = parent;
             ChildWindows = childWindows;
         }
@@ -45,7 +58,7 @@ namespace Golmodoth.Client
         public abstract void OnRender(ConsoleEngine engine);
         public void Render(ConsoleEngine engine)
         {
-            VisibleFrame.Draw(engine);
+            VisibleFrame.Render(engine);
             OnRender(engine);
         }
     }
