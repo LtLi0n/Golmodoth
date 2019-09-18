@@ -11,9 +11,12 @@ namespace Golmodoth.Client
 
         ///<summary>Cursor position</summary>
         public Point Cursor { get; set; }
-        ///<summary>Offset the cursor position by fixed about.</summary>
-        public Point Offset { get; set; }
-        public Point FinalCursor => Cursor + Offset;
+        ///<summary>Offset the cursor position by fixed amount.</summary>
+        public Point Offset 
+        { 
+            get => _frame.Offset; 
+            set => _frame.Offset = value; 
+        }
 
         public byte Color { get; set; }
 
@@ -23,14 +26,24 @@ namespace Golmodoth.Client
             Size = size;
         }
 
-        public void WriteLine(object content)
+        public void WriteLine(object content, byte? color = null)
         {
+            if (color != null)
+            {
+                Color = color.Value;
+            }
+
             Write(content);
             NewLine();
         }
 
-        public void Write(object content)
+        public void Write(object content, byte? color = null)
         {
+            if(color != null)
+            {
+                Color = color.Value;
+            }
+
             string contentStr = content.ToString();
             for(int i = 0; i < contentStr.Length; i++)
             {
@@ -40,7 +53,7 @@ namespace Golmodoth.Client
                 }
                 else
                 {
-                    _frame[FinalCursor.X, FinalCursor.Y] = new ConsolePixel(Color, contentStr[i]);
+                    _frame[Cursor.X, Cursor.Y] = new ConsolePixel(Color, contentStr[i]);
                     Cursor += new Point(1, 0);
                     CheckAgainstHorizontalAxis();
                 }
@@ -55,7 +68,7 @@ namespace Golmodoth.Client
 
         public void CheckAgainstHorizontalAxis()
         {
-            if (FinalCursor.X > Size.Width - 1)
+            if (Cursor.X > Size.Width - 1)
             {
                 Cursor -= new Point(1, 0);
             }
@@ -63,7 +76,7 @@ namespace Golmodoth.Client
 
         public void CheckAgainstVerticalAxis()
         {
-            if (FinalCursor.Y > Size.Height - 1)
+            if (Cursor.Y > Size.Height - 1)
             {
                 Cursor -= new Point(0, 1);
             }

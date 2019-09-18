@@ -2,10 +2,13 @@
 
 namespace Golmodoth.Client
 {
-    public class Frame
+    public class Frame : ISizeable
     {
+        public int Width { get; }
+        public int Height { get; }
+
         public ConsolePixel[,] Pixels { get; set; }
-        public ISizeable Size { get; }
+        public Point Offset { get; set; } = new Point(0, 0);
 
         public ConsolePixel this[int x, int y]
         {
@@ -15,8 +18,9 @@ namespace Golmodoth.Client
 
         public Frame(ISizeable size)
         {
-            Size = size;
-            Pixels = new ConsolePixel[Size.Width, Size.Height];
+            Width = size.Width;
+            Height = size.Height;
+            Pixels = new ConsolePixel[Width, Height];
         }
 
         //todo
@@ -25,14 +29,14 @@ namespace Golmodoth.Client
 
         }
 
-        public void Draw(ConsoleEngine engine)
+        public void Render(ConsoleEngine engine)
         {
-            for (int y = 0; y < Size.Height; y++)
+            for (int y = 0; y < Height; y++)
             {
-                for (int x = 0; x < Size.Width; x++)
+                for (int x = 0; x < Width; x++)
                 {
                     ConsolePixel pixel = Pixels[x, y];
-                    engine.SetPixel(x, y, pixel.Color, pixel.Glyph);
+                    engine.SetPixel(x + Offset.X, y + Offset.Y, pixel.Color, pixel.Glyph);
                 }
             }
         }
