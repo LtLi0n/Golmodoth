@@ -10,12 +10,12 @@ using Microsoft.EntityFrameworkCore;
 namespace Golmodoth.Shared
 {
     [Table("users")]
-    public class User : IEntity<User, uint>
+    public class User : IEntity<User, int>
     {
         [Key]
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(32)")]
+        [Column(TypeName = "nvarchar(32)"), Required]
         public string Username { get; set; }
 
         ///<summary>Don't forget to regex check the email format</summary>
@@ -30,13 +30,23 @@ namespace Golmodoth.Shared
         [JsonIgnore, IgnoreDataMember]
         public ICollection<Character> Characters { get; set; }
 
+        [JsonIgnore, IgnoreDataMember]
+        public ICollection<ApiKey> ApiKeys { get; set; }
+
         public static void CreateModel(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>(x =>
             {
+                x.HasIndex(user => user.Username).IsUnique();
+                x.HasIndex(user => user.Email).IsUnique();
+
                 x.HasMany(user => user.Characters)
                 .WithOne(character => character.User)
                 .HasForeignKey(character => character.UserId);
+
+                x.HasMany(user => user.ApiKeys)
+                .WithOne(apiKey => apiKey.User)
+                .HasForeignKey(apiKey => apiKey.UserId);
             });
         }
     }
