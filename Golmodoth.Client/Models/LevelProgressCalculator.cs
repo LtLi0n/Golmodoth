@@ -14,21 +14,21 @@ namespace Golmodoth.Client
 
         public LevelProgress GetProgress(BigInteger xp) => _func(xp);
 
-        public static LevelProgress CharacterLevelProgressConverter(BigInteger totalXp)
+        public static LevelProgress CharacterLevelProgressConverter(string totalXp)
         {
-            BigInteger xp = totalXp;
+            BigInteger xp = BigInteger.Parse(totalXp);
 
             uint level = 1;
             ulong xpCap = 100;
 
-            while(totalXp >= xpCap)
+            while(xp >= xpCap)
             {
-                totalXp -= xpCap;
+                xp -= xpCap;
                 level++;
                 xpCap += level * 250;
             }
 
-            return new LevelProgress(level, (ulong)totalXp, xpCap);
+            return new LevelProgress(level, (ulong)xp, xpCap);
         }
     }
 }

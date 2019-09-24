@@ -24,7 +24,7 @@ namespace Golmodoth.Client
             _character = new SocketCharacter()
             {
                 Name = "LtLi0n",
-                TotalXp = 0,
+                TotalXp = "0",
                 Gold = 0
             };
 
